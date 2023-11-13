@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
-// import Box from '@mui/material/Box';
-// import TextField from '@mui/material/TextField';
 
 export default function Texform(props) {
+  console.log(props)
+  const modeType = props.mode==='light' ? 'white' : '#212529'
+  const textMode = props.mode==='light' ? '#212529' : 'white'
 
   const [text, setText] = useState("")
   const [updatedText, setUpdatedText] = useState("")
@@ -11,17 +12,21 @@ export default function Texform(props) {
 
   const handleUpperCase = () =>{
     setUpdatedText(text.toUpperCase())
+    props.showAlert("Upper case", "success")
   }
 
   const handleLowerCase = () => {
     setUpdatedText(text.toLowerCase())
+    props.showAlert("Lower case", "success")
   }
 
   const handleClear = () => {
     setText("")
     setUpdatedText("")
     setAappearedWord("")
+    props.showAlert("Clear", "success")
   }
+  
 
   const handleMostApprearedWord = () => {
     let words= text.split(" ")
@@ -45,9 +50,10 @@ export default function Texform(props) {
       }
     }
     
-    console.log(mostApprearedWord)
+    // console.log(mostApprearedWord)
     setAappearedWord(mostApprearedWord)
     // return {"word":mostApprearedWord, "cnt":macCnt}
+    props.showAlert("Most appeared word", "success")
   }
 
   const handleCopy = () => {
@@ -55,24 +61,26 @@ export default function Texform(props) {
     copyText.select();
     navigator.clipboard.writeText(copyText.value);
   
-    alert("Copied the text: " + copyText.value);
+    // alert("Copied the text: " + copyText.value);
+    props.showAlert("Copied the text" + copyText.value, "success")
 
   }
 
   const handleExtraSpaces = () => {
     setUpdatedText(text.trim())
+    props.showAlert("Extra spaxe", "success")
   }
 
   const handleOnChange = (event) => {
     setText(event.target.value)
   }
-
+  // console.log(modeType)
   return (
-    <>
-        <div className="container my-4">
+      <>
+        <div className="container my-4" style={{color:textMode}}>
             <h1>{props.heading}</h1>
             <div className="mb-3">
-                <textarea className="form-control" id="myBox" rows="8" value={text} onChange= {handleOnChange}></textarea>
+                <textarea className="form-control" style={{backgroundColor: modeType, color:textMode}} id="myBox" rows="8" value={text} onChange= {handleOnChange}></textarea>
             </div>
             <button className="btn btn-primary mx-2" onClick={handleUpperCase}>Upper Case</button>
             <button className="btn btn-primary mx-2" onClick={handleLowerCase}>Lower Case</button>
@@ -81,7 +89,7 @@ export default function Texform(props) {
             <button className="btn btn-primary mx-2" onClick={handleMostApprearedWord}>Most Appeared Word</button>
             <button className="btn btn-primary mx-2" onClick={handleClear}>Clear</button>
         </div>
-        <div className="container my-4">
+        <div className="container my-4" style={{color:textMode}}>
             <h2>Text Analysis</h2>
             <p>{text.split(" ").length} Word count and {text.length} Character count</p>
             <p>{0.008 * text.split(" ").length} Minutes read</p>
@@ -90,7 +98,6 @@ export default function Texform(props) {
             <h2>Text Preview</h2>
             <p>{updatedText}</p>
         </div>
-   </>
-
+      </>
   )
 }
