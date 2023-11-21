@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 export default function Texform(props) {
-  console.log(props)
+  // console.log(props)
   const modeType = props.mode==='light' ? 'white' : '#212529'
   const textMode = props.mode==='light' ? '#212529' : 'white'
 
@@ -74,6 +74,18 @@ export default function Texform(props) {
   const handleOnChange = (event) => {
     setText(event.target.value)
   }
+
+  const wordCount=(text) => {
+    let arr= text.split(" ")
+    let wordCnt= 0
+    arr.forEach(element => {
+      let str = element.trim()
+      if(str!=='') {
+        wordCnt++
+    }
+   });
+    return wordCnt
+  }
   // console.log(modeType)
   return (
       <>
@@ -91,7 +103,7 @@ export default function Texform(props) {
         </div>
         <div className="container my-4" style={{color:textMode}}>
             <h2>Text Analysis</h2>
-            <p>{text.split(" ").length} Word count and {text.length} Character count</p>
+            <p>{wordCount(text)} Word count and {text.length} Character count</p>
             <p>{0.008 * text.split(" ").length} Minutes read</p>
             {/* <p>Copy text: {copyText}</p> */}
             <p>{appearedWord} is appeared</p>
