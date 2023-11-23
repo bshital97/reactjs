@@ -1,16 +1,16 @@
 // import logo from './logo.svg';
 import { useState } from 'react';
 import './App.css';
-import Aboutus from './components/Aboutus';
+// import Aboutus from './components/Aboutus';
 import Navbar from './components/Navbar';
 import Texform from './components/Texform';
 import Alerts from './components/Alerts';
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Link
-} from "react-router-dom";
+// import {
+//   BrowserRouter as Router,
+//   Routes,
+//   Route,
+//   Link
+// } from "react-router-dom";
 
 function App() {
 
@@ -43,18 +43,19 @@ function App() {
 
   }
   return (
-    // <div>
-      <Router>
+    <div>
+      {/* <Router> */}
       <Navbar title="TextUtilsApp" about="About" mode={mode} toggleMode={toggleMode} checked={checked}></Navbar>
       <Alerts alert={alert}/>
       <div className="container my-3">
-      <Routes>
+        <Texform showAlert={showAlert} heading="Enter the text to analyze below" mode={mode} />
+      {/* <Routes>
           <Route path="/About" element={<Aboutus/>}/>
           <Route path="/" element= {<Texform showAlert={showAlert} heading="Enter the text to analyze below" mode={mode} />}/>
-        </Routes>
+        </Routes> */}
       </div>
-      </Router> 
-    // </div>
+      {/* </Router>  */}
+     </div>
 
   );
 }
